@@ -1,5 +1,5 @@
 #include <linux/unistd.h>
-#define __NR_my_syscall 347
+#define __NR_my_syscall 359
 
 int main()
 {
