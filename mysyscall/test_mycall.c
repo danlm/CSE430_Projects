@@ -3,6 +3,6 @@
 
 int main()
 {
-	syscall(__NR_my_syscall);
+	printf("%s", syscall(__NR_my_syscall));
 	return 0;
 }
