@@ -1,3 +1,8 @@
+/*	CSE 430 Assignment 1
+martin_liao_van.c
+Description: Kernel module to print out names of the team members to the kernel log.
+*/
+
 #include <linux/module.h>	/* Needed by all modules */
 #include <linux/kernel.h>	/* Needed for KERN_INFO */
 #include <linux/init.h>
