@@ -1,1 +1,0 @@
-cmd_/home/cse430/Documents/CSE430/cse430/martin_liao_van.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /home/cse430/Documents/CSE430/cse430/martin_liao_van.ko /home/cse430/Documents/CSE430/cse430/martin_liao_van.o /home/cse430/Documents/CSE430/cse430/martin_liao_van.mod.o
