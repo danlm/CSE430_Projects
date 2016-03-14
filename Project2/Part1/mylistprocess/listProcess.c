@@ -37,6 +37,7 @@ static void generate_Tasklist(void *buf, int size)
 	struct task_struct *task;
 	
 	// You will need to use a variable to iterate through the buffer that stores the information
+	int i = 0;
 	read_lock(&tasklist_lock); // This will lock the overall task list
 	for_each_process(task)
 	{
@@ -59,7 +60,8 @@ static void generate_Tasklist(void *buf, int size)
 		read_unlock(&task);
 		
 		// Copy the contents of the temp variable into the variable buf using the right command
-		copy_to_user(buf, &temp, sizeof(temp));
+		++i;
+		copy_to_user(buf+i*sizeof(temp), &temp, sizeof(temp));
 		
 		// You may print the values you extracted to the kernel log just to be sure
 		printk(KERN_INFO "%d\t%s\t%d\t%s\n", temp.pid, temp.tty, temp.time, temp.cmd);
