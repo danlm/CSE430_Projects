@@ -27,15 +27,15 @@ int main()
 	char* buffer;
 	int size = 1024;
 	syscall(__NR_my_syscall, buffer, size);
-	printf("%5s %s\t%8s %s\n", "PID", "TTY", "TIME", "CMD");
+	printf("PID\tTTY\tTIME\tCMD\n");
 	for (char *i=buffer; i < buffer+size*sizeof(task_info); i = i+sizeof(taskinfo))
 	{
-		printf("%5d %-8s\t", i->PID, i->tty);
+		printf("%d\t%s\t", i->PID, i->tty);
 		unsigned long long temp = i->time/250;
 		int hours = temp/3600;
 		int minutes = (temp-hours*3600)/60;
 		int seconds = (temp-hours*3600-minutes*60);
-		printf("%02d:%02d:%02d %-8s\n", hours, minutes, seconds, i->cmd);
+		printf("%02d:%02d:%02d\t%s\n", hours, minutes, seconds, i->cmd);
 	}
 	
 	return 0;
