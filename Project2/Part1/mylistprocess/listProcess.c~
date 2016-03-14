@@ -64,7 +64,7 @@ static void generate_Tasklist(void *buf, int size)
 		copy_to_user(buf+i*sizeof(temp), &temp, sizeof(temp));
 		
 		// You may print the values you extracted to the kernel log just to be sure
-		printk(KERN_INFO "%d\t%s\t%llu\t%s\n", temp.PID, temp.tty, temp.time, temp.cmd);
+		printk(KERN_INFO "%d\t%s\t%d\t%s\n", temp.PID, temp.tty, temp.time, temp.cmd);
 	}
 	// Unlock the overall task list
 	read_unlock(&tasklist_lock);
