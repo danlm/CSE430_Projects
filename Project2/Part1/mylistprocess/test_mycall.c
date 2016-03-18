@@ -24,19 +24,19 @@ struct task_info
 
 int main()
 {
-	char* buffer;
-	int size = 1024;
+	struct task_info buffer[4096];
+	int size = 4096;
 	syscall(__NR_my_syscall, buffer, size);
 	printf("%5s %s\t%8s %s\n", "PID", "TTY", "TIME", "CMD");
-	for (char *i=buffer; i < buffer+size*sizeof(task_info); i = i+sizeof(taskinfo))
+	int i;
+	for (i = 1; buffer[i].PID != 0; i++)
 	{
-		printf("%5d %-8s\t", i->PID, i->tty);
-		unsigned long long temp = i->time/250;
+		printf("%5d %-8s\t", buffer[i].PID, buffer[i].tty);
+		unsigned long long temp = buffer[i].time/250;
 		int hours = temp/3600;
 		int minutes = (temp-hours*3600)/60;
 		int seconds = (temp-hours*3600-minutes*60);
-		printf("%02d:%02d:%02d %-8s\n", hours, minutes, seconds, i->cmd);
+		printf("%02d:%02d:%02d %-8s\n", hours, minutes, seconds, buffer[i].cmd);
 	}
-	
 	return 0;
 }
