@@ -48,7 +48,7 @@ static void kill_family(struct task_struct *p)
 	{
 		// Assign to the pointer of tast_struct the return value of the list_entry() function
 		// by passing the appropriate arguments to the function
-		task = list_entry(list, struct todo_struct, list);	/* What is the containing structure? */
+		task = list_entry(list, struct task_struct, children);	/* Which field in task_struct? */
 		// Call the function kill_family() recursively with the task_struct pointer as its 
 		// argument.
 		kill_family(task);
