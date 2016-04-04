@@ -23,7 +23,7 @@ volatile unsigned int fdb_pid_threshold = 1700;
 
 struct task_struct *fdb_suspect = NULL;
 struct task_struct *hello_kthread = NULL;
-struct semaphore *sem_lock = NULL;
+struct semaphore *semap_lock = NULL;
 
 struct hello_task_info 
 {
@@ -42,13 +42,14 @@ static void kill_family(struct task_struct *p)
 	//Create a pointer to task_struct
 	struct task_struct *task;
 	//Create a pointer to list_head
-	struct list_head *list; /* INIT_LIST_HEAD(list); */
+	struct list_head *list;
+	INIT_LIST_HEAD(list);
 	//Use the following loop to iterate through each child of the parent
 	list_for_each(list, &p->children) 
 	{
 		// Assign to the pointer of tast_struct the return value of the list_entry() function
 		// by passing the appropriate arguments to the function
-		task = list_entry(list, struct task_struct, children);	/* Which field in task_struct? */
+		task = list_entry(list, struct task_struct, sibling);
 		// Call the function kill_family() recursively with the task_struct pointer as its 
 		// argument.
 		kill_family(task);
@@ -67,8 +68,8 @@ static int fbd_kthread_function(void *data)
 {
 	while(!kthread_should_stop()) 
 	{
-		// Lock the sem_lock variable using down()
-		down(sem_lock);
+		// Lock the semap_lock variable using down()
+		down(semap_lock);
 		if(fdb_debug > 0)
 			printk("fbd_kthread wake up\n");
 
