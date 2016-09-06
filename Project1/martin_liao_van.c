@@ -9,7 +9,7 @@ Description: Kernel module to print out names of the team members to the kernel 
 
 static int __init my_name(void)
 {
-	printk(KERN_INFO "Daniel Martin, Kevin Liao, Kevin Van\n");
+	printk(KERN_INFO "Martin, Liao, Van\n");
 	return 0;
 }
 
